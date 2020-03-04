@@ -8,7 +8,9 @@ module TranslationIO
     end
 
     initializer 'translation.rails_extensions' do
-      ActionController::Base.send(:include, TranslationIO::Controller)
+      ActiveSupport.on_load(:action_controller) do
+        ActionController::Base.send(:include, TranslationIO::Controller)
+      end
     end
 
     config.after_initialize do
